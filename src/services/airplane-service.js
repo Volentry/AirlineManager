@@ -28,8 +28,34 @@ const getAirplanes = async ()=>{
     }catch(error){
         throw new Apperror(['Cannot fetch data of all airplanes'],StatusCodes.INTERNAL_SERVER_ERROR)
     }
-}
+} 
+const getAirplane = async (id)=>{
+    try{
+        const airplane = airplanerepository.get(id);
+        
+        return airplane
+    }catch(error){
+        if(error.statusCode==404){
+            throw new Apperror('airplane you requested is not present',error.statusCode)
+        }
+        throw new Apperror(['Cannot fetch data of the airplane'],StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+} 
+const destroyAirplane = async (id)=>{
+    try{
+        const airplane = airplanerepository.destroy(id);
+        
+        return airplane
+    }catch(error){
+        if(error.statusCode==404){
+            throw new Apperror('airplane you requested is not present',error.statusCode)
+        }
+        throw new Apperror(['Cannot fetch data of the airplane'],StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+} 
 module.exports={
     createAirplane
-    ,getAirplanes
+    ,getAirplanes,
+    getAirplane,
+    destroyAirplane
 }

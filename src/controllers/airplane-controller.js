@@ -63,4 +63,19 @@ const destroyAirplane = async (req,res,next)=>{
     }
 
 }
-module.exports = {createAirplane,getAirplanes,getAirplane,destroyAirplane}
+const patchAirplane = async (req,res,next)=>{
+    try{
+        const airplanes = await AirplaneService.patchAirplane(req.params.id,req.body);
+        SuccessResponse.data = airplanes
+        return res.status(StatusCodes.OK).json(SuccessResponse)
+
+    }catch(error){
+        ErrorResponse.error = error;
+       
+        console.log(error)
+        return res.status(error.statusCode).json(ErrorResponse);
+        
+    }
+
+}
+module.exports = {createAirplane,getAirplanes,getAirplane,destroyAirplane,patchAirplane}

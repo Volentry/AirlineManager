@@ -53,9 +53,22 @@ const destroyAirplane = async (id)=>{
         throw new Apperror(['Cannot fetch data of the airplane'],StatusCodes.INTERNAL_SERVER_ERROR)
     }
 } 
+const patchAirplane = async (data,id)=>{
+    try{
+        const airplane = airplanerepository.update(id,data);
+        
+        return airplane
+    }catch(error){
+        if(error.statusCode==404){
+            throw new Apperror('airplane you requested is not present',error.statusCode)
+        }
+        throw new Apperror(['Cannot fetch data of the airplane'],StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+} 
 module.exports={
     createAirplane
     ,getAirplanes,
     getAirplane,
-    destroyAirplane
+    destroyAirplane,
+    patchAirplane
 }

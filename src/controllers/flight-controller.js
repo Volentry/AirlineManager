@@ -1,0 +1,43 @@
+
+const { StatusCodes } = require('http-status-codes')
+const {FlightService} = require('../services/index')
+const { SuccessResponse, ErrorResponse } = require('../utils/common')
+const { Model } = require('sequelize')
+
+async function createFlight(req,res) {
+
+    try{
+        const flight = await FlightService.createFlight({
+           flightNumber:req.body.flightNumber,
+           airplaneId:req.body.airplaneId,
+           arrivalAirportId:req.body.arrivalAirportId,
+           departureAirportId:req.body.departureAirportId,
+           arrivalTime : req.body.arrivalTime,
+           departureTime : req.body.departureTime,
+           price : req.body.price,
+           boardingGate : req.body.boardingGate,
+           totalSeats : req.body.totalSeats,
+        })
+        SuccessResponse.data = flight
+        return res.status(StatusCodes.CREATED).json(SuccessResponse)
+    }catch(error){
+        ErrorResponse.error = error
+        return res.status(error.statusCode||StatusCodes.BAD_REQUEST).json(ErrorResponse)
+    }
+
+     
+} 
+async function getAllFlights(req,res) {
+
+    try{
+        const flights = await FlightService.getAllFlights(req.query)
+        SuccessResponse.data = flights
+        return res.status(StatusCodes.CREATED).json(SuccessResponse)
+    }catch(error){
+        ErrorResponse.error = error
+        return res.status(error.statusCode||StatusCodes.BAD_REQUEST).json(ErrorResponse)
+    }
+
+     
+} 
+module.exports ={ createFlight,getAllFlights}

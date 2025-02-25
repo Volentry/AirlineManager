@@ -39,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     arrivalTime: {type:DataTypes.DATE
       ,allowNull:false   
     },
-    departureTime: {type:DataTypes.DATE}
-    ,allowNull:false   ,
+    departureTime: {type:DataTypes.DATE
+    ,allowNull:false}   ,
     price: {type:DataTypes.INTEGER
       ,allowNull:false   
     },

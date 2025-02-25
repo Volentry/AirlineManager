@@ -6,4 +6,7 @@ const airplaneroutes = require('./airplane-routes')
 router.use('/airplanes',airplaneroutes)
 const cityroutes = require('./city-routes')
 router.use('/cities',cityroutes)
-module.exports = router; // ✅ Correct export
+const airportroutes = require('./airport-routes')
+router.use('/airports',airportroutes)
+module.exports = router;
+

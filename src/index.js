@@ -8,4 +8,5 @@ app.use('/api',apiRoutes)
 app.listen(serverConfig.PORT,()=>{
     console.log(`Successfully connected : ${serverConfig.PORT}`)
     Logger.info('successfully started a server')
+  
 })

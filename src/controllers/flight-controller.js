@@ -55,4 +55,19 @@ const getFlight = async (req,res,next)=>{
     }
 
 }
-module.exports ={ createFlight,getAllFlights,getFlight}
+const updateFlightSeats = async (req,res,next)=>{
+    try{
+        const flight = await FlightService.updateFlightSeats({flightId:req.params.id,seats:req.body.seats,dec:req.body.dec});
+        SuccessResponse.data = flight
+        return res.status(StatusCodes.OK).json(SuccessResponse)
+
+    }catch(error){
+        ErrorResponse.error = error;
+       
+       
+        return res.status(error.statusCode).json(ErrorResponse);
+        
+    }
+
+}
+module.exports ={ createFlight,getAllFlights,getFlight,updateFlightSeats}

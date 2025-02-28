@@ -5,4 +5,5 @@ const router = express.Router()
 router.post('/',Flightmiddleware.validateCreateRequest,flightController.createFlight)
 router.get('/',flightController.getAllFlights)
 router.get('/:id',flightController.getFlight)
+router.patch('/:id/seats',Flightmiddleware.validateUpdateRequest,flightController.updateFlightSeats)
 module.exports = router

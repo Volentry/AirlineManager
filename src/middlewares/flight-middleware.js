@@ -53,4 +53,17 @@ function validateCreateRequest(req,res,next){
     next( )
 
 }
-module.exports = {validateCreateRequest}
+function validateUpdateRequest(req,res,next){
+
+ 
+    if(!req.body.seats){
+        ErrorResponse.message = 'seats is required';
+        ErrorResponse.error = new Apperror(['airplaneId is missing'],StatusCodes.BAD_REQUEST)
+        return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse)
+    }
+   
+
+    next( )
+
+}
+module.exports = {validateCreateRequest,validateUpdateRequest}

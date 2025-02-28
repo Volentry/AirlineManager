@@ -77,10 +77,23 @@ const getFlight = async (id)=>{
         throw new Apperror(['Cannot fetch data of the airport'],StatusCodes.INTERNAL_SERVER_ERROR)
     }
 } 
+const updateFlightSeats = async (data)=>{
+    try{
+        const flight = flightrepository.updateFlightSeats(data.flightId,data.seats,data.dec);
+        
+        return flight
+    }catch(error){
+        if(error.statusCode==404){
+            throw new Apperror(' you requested is not present',error.statusCode)
+        }
+        throw new Apperror(['Cannot fetch data of the airport'],StatusCodes.INTERNAL_SERVER_ERROR)
+    }
+} 
 
 module.exports={
     createFlight,
     getAllFlights,
-    getFlight
+    getFlight,
+    updateFlightSeats
    
 }
